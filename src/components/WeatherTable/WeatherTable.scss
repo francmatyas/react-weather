@@ -1,0 +1,11 @@
+.weather-table {
+  width: 32rem;
+
+  border: 3px solid #000;
+  border-radius: 10px;
+
+  .weather-table__header {
+    border-bottom: #000 3px solid;
+    //border-bottom-style: dashed;
+  }
+}

@@ -1,17 +1,20 @@
 import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Spinner from "react-bootstrap/Spinner";
 
 import { useState, useEffect } from "react";
 
 import Content from "./components/Content/Content";
 
 function App() {
-  const [weather, setWeather] = useState(null);
-  const [sunrise, setSunrise] = useState(null);
-  const [sunset, setSunset] = useState(null);
+  const [loader, setLoader] = useState(false);
+  const [weather, setWeather] = useState({});
+  const [sunrise, setSunrise] = useState({});
+  const [sunset, setSunset] = useState({});
 
-  const [lat, setLat] = useState(null);
-  const [lon, setLon] = useState(null);
-  const [status, setStatus] = useState(null);
+  const [lat, setLat] = useState(0);
+  const [lon, setLon] = useState(0);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -25,6 +28,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    setLoader(true);
     if (lat && lon) {
       fetch(
         `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${lat}&lon=${lon}`,
@@ -37,6 +41,7 @@ function App() {
         .then((response) => response.json())
         .then((data) => {
           setWeather(data);
+          setLoader(false);
         });
     }
   }, [lat, lon]);
@@ -48,7 +53,7 @@ function App() {
       const month = datetime.getMonth() + 1;
       const day = datetime.getDate();
       const date = year + "-" + (month > 9 ? month : "0" + month) + "-" + day;
-      const offsetNumeric = - (datetime.getTimezoneOffset() / 60);
+      const offsetNumeric = -(datetime.getTimezoneOffset() / 60);
       const offset =
         (offsetNumeric > 0 ? "+" : "-") +
         (Math.abs(offsetNumeric) > 9
@@ -74,7 +79,7 @@ function App() {
 
   function getWeatherByDate(date) {
     const weatherByDate =
-      weather &&
+      Object.getOwnPropertyNames(weather).length != 0 &&
       weather.properties.timeseries.filter((element) => {
         const elementDate = new Date(element.time);
         return (
@@ -87,7 +92,7 @@ function App() {
   }
 
   const weatherByDate =
-    weather &&
+    Object.getOwnPropertyNames(weather).length != 0 &&
     weather.properties.timeseries.reduce((acc, element) => {
       const date = new Date(element.time);
       const dateKey =
@@ -101,16 +106,23 @@ function App() {
     }, {});
 
   useEffect(() => {
-    if (weather) {
+    if (Object.getOwnPropertyNames(weather).length != 0 && sunrise && sunset) {
       console.log(sunrise, sunset);
       console.log(getWeatherByDate(new Date("2023-01-20T00:00:00Z")));
       console.log(weatherByDate);
+      console.log(lat, lon);
     }
   }, [weather, sunrise, sunset]);
 
   return (
     <div className="App">
-      <Content weather={weather && weather.properties.timeseries}/>
+      {loader ? (
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      ) : (
+        <Content weather={weatherByDate} />
+      )}
       <p>{status}</p>
     </div>
   );
