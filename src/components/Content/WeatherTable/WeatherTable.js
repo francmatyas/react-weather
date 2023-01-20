@@ -3,7 +3,6 @@ import "./WeatherTable.scss";
 import {
   TbTemperatureCelsius,
   TbClock,
-  TbWind,
   TbUmbrella,
   TbTornado,
 } from "react-icons/tb";
