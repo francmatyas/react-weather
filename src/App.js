@@ -79,20 +79,6 @@ function App() {
     }
   }, [lat, lon]);
 
-  /* function getWeatherByDate(date) {
-    const weatherByDate =
-      Object.getOwnPropertyNames(weather).length != 0 &&
-      weather.properties.timeseries.filter((element) => {
-        const elementDate = new Date(element.time);
-        return (
-          elementDate.getDate() === date.getDate() &&
-          elementDate.getMonth() === date.getMonth() &&
-          elementDate.getFullYear() === date.getFullYear()
-        );
-      });
-    return weatherByDate;
-  } */
-
   useEffect(() => {
     if (Object.getOwnPropertyNames(weather).length !== 0) {
       const weatherDate = weather.properties.timeseries.reduce(
@@ -135,7 +121,10 @@ function App() {
 
   return (
     <div className="App">
-      <Content weather={weatherDate} />
+      <div className="App__background"></div>
+      <div className="App__content">
+        <Content weather={weatherDate} sunrise={sunrise} sunset={sunset} />
+      </div>
     </div>
   );
 }
