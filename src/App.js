@@ -1,5 +1,5 @@
-import "./App.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.scss";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Spinner from "react-bootstrap/Spinner";
 
 import { useState, useEffect } from "react";
@@ -9,6 +9,8 @@ import Content from "./components/Content/Content";
 function App() {
   const [loader, setLoader] = useState(false);
   const [weather, setWeather] = useState({});
+  const [weatherDate, setWeatherDate] = useState([]);
+
   const [sunrise, setSunrise] = useState({});
   const [sunset, setSunset] = useState({});
 
@@ -77,7 +79,7 @@ function App() {
     }
   }, [lat, lon]);
 
-  function getWeatherByDate(date) {
+  /* function getWeatherByDate(date) {
     const weatherByDate =
       Object.getOwnPropertyNames(weather).length != 0 &&
       weather.properties.timeseries.filter((element) => {
@@ -89,41 +91,51 @@ function App() {
         );
       });
     return weatherByDate;
-  }
-
-  const weatherByDate =
-    Object.getOwnPropertyNames(weather).length != 0 &&
-    weather.properties.timeseries.reduce((acc, element) => {
-      const date = new Date(element.time);
-      const dateKey =
-        date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
-      if (acc[dateKey]) {
-        acc[dateKey].push(element);
-      } else {
-        acc[dateKey] = [element];
-      }
-      return acc;
-    }, {});
+  } */
 
   useEffect(() => {
-    if (Object.getOwnPropertyNames(weather).length != 0 && sunrise && sunset) {
-      console.log(sunrise, sunset);
-      console.log(getWeatherByDate(new Date("2023-01-20T00:00:00Z")));
-      console.log(weatherByDate);
-      console.log(lat, lon);
+    if (Object.getOwnPropertyNames(weather).length !== 0) {
+      const weatherDate = weather.properties.timeseries.reduce(
+        (acc, element) => {
+          const date = new Date(element.time);
+          const dateKey =
+            date.getDate() +
+            "." +
+            (date.getMonth() + 1) +
+            "." +
+            date.getFullYear();
+          if (acc[dateKey]) {
+            acc[dateKey].push(element);
+          } else {
+            acc[dateKey] = [element];
+          }
+          return acc;
+        },
+        {}
+      );
+      setWeatherDate(Object.values(weatherDate));
     }
-  }, [weather, sunrise, sunset]);
+  }, [weather]);
 
-  return (
-    <div className="App">
-      {loader ? (
+  if (loader) {
+    return (
+      <div className="App__loader">
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
-      ) : (
-        <Content weather={weatherByDate} />
-      )}
-      <p>{status}</p>
+      </div>
+    );
+  } else if (status) {
+    return (
+      <div className="App__loader">
+        <p>{status}</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="App">
+      <Content weather={weatherDate} />
     </div>
   );
 }

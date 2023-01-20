@@ -3,7 +3,7 @@ import "./WeatherRow.scss";
 function WeatherRow(props) {
   const weather = props.weather;
 
-  const time = new Date(weather.time).getHours();
+  const time = weather.hour;
   const temperature = Math.round(weather.data.instant.details.air_temperature);
   const precipitation =
     weather.data.next_1_hours !== undefined &&
