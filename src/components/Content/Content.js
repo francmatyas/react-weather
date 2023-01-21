@@ -14,11 +14,11 @@ function Content(props) {
     <div className="content">
       <div className="weather">
         <div className="weather__day">
-          {/* <CurrentWeather
+          <CurrentWeather
             weather={weather[0][0]}
             sunrise={props.sunrise}
             sunset={props.sunset}
-          /> */}
+          />
         </div>
         {weather.map((element) => (
           <WeatherTable weather={element} key={Math.random()} />

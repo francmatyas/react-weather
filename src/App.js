@@ -124,6 +124,7 @@ function App() {
       <div className="App__background"></div>
       <div className="App__content">
         <Content weather={weatherDate} sunrise={sunrise} sunset={sunset} />
+        <h3 className="App__demo">DEMO Weather App</h3>
       </div>
     </div>
   );

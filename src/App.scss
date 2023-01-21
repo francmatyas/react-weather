@@ -23,6 +23,16 @@
     bottom: 0;
 
     overflow: scroll;
+
+
+    .App__demo{
+      position: fixed;
+      bottom: 0;
+      right: 0;
+
+      padding: 0 1rem;
+      color: rgba($color: #000000, $alpha: 0.25);
+    }
   }
 }
 
