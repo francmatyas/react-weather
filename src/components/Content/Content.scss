@@ -1,10 +1,27 @@
+.content {
+  grid-row: content-start / content-end;
+  padding: 2rem;
+  padding-bottom: 4rem;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .weather {
-  width: min-content;
-  margin: 2rem auto;
+  height: 100%;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  background-color: transparent;
+
+  .weather__table {
+    height: 100rem;
+
+    overflow: scroll;
+  }
 }

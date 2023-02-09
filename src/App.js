@@ -1,24 +1,50 @@
 import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Spinner from "react-bootstrap/Spinner";
 
 import { useState, useEffect } from "react";
 
 import Content from "./components/Content/Content";
+import Header from "./components/Header/Header";
+
+import lineImg from "./assets/svgs/line.svg";
+import summerImg from "./assets/svgs/summer.svg";
+import winterImg from "./assets/svgs/winter.svg";
+import rainImg from "./assets/svgs/rain.svg";
+import hikingImg from "./assets/svgs/hiking.svg";
 
 function App() {
-  const [loader, setLoader] = useState(false);
+  const [tab, setTab] = useState("forecast");
+  const [unit, setUnit] = useState("celsius");
+
+  const [location, setLocation] = useState({});
   const [weather, setWeather] = useState({});
   const [weatherDate, setWeatherDate] = useState([]);
 
-  const [sunrise, setSunrise] = useState({});
-  const [sunset, setSunset] = useState({});
+  const [image, setImage] = useState(hikingImg);
 
-  const [lat, setLat] = useState(0);
-  const [lon, setLon] = useState(0);
-  const [status, setStatus] = useState("");
+  function searchSelectHandler(location) {
+    setLocation(location);
+  }
 
   useEffect(() => {
+    if (weatherDate.length !== 0) {
+      const weather = weatherDate[0][0];
+      const temp = weather.data.instant.details.air_temperature;
+      const precipitation =
+        weather.data.next_1_hours.details.precipitation_amount;
+
+      if (precipitation < 0.1 && temp > 20) {
+        setImage(summerImg);
+      } else if (precipitation < 0.1 && temp < 5) {
+        setImage(winterImg);
+      }
+      if (precipitation > 0.1) {
+        setImage(rainImg);
+      }
+    }
+  }, [weatherDate]);
+
+  /*   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         setLat(position.coords.latitude);
@@ -27,13 +53,12 @@ function App() {
     } else {
       setStatus("Geolocation is not supported by this browser.");
     }
-  }, []);
+  }, []); */
 
   useEffect(() => {
-    setLoader(true);
-    if (lat && lon) {
+    if (location.lat && location.lon) {
       fetch(
-        `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${lat}&lon=${lon}`,
+        `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${location.lat}&lon=${location.lon}`,
         {
           headers: {
             "User-Agent": "demo-weather-app, github.com/francmatyas",
@@ -43,12 +68,11 @@ function App() {
         .then((response) => response.json())
         .then((data) => {
           setWeather(data);
-          setLoader(false);
         });
     }
-  }, [lat, lon]);
+  }, [location]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (lat && lon) {
       const datetime = new Date();
       const year = datetime.getFullYear();
@@ -77,7 +101,7 @@ function App() {
           setSunset(data.location.time[0].sunset.time);
         });
     }
-  }, [lat, lon]);
+  }, [lat, lon]); */
 
   useEffect(() => {
     if (Object.getOwnPropertyNames(weather).length !== 0) {
@@ -103,29 +127,24 @@ function App() {
     }
   }, [weather]);
 
-  if (loader) {
-    return (
-      <div className="App__loader">
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      </div>
-    );
-  } else if (status) {
-    return (
-      <div className="App__loader">
-        <p>{status}</p>
-      </div>
-    );
-  }
-
   return (
     <div className="App">
-      <div className="App__background"></div>
-      <div className="App__content">
-        <Content weather={weatherDate} sunrise={sunrise} sunset={sunset} />
-        <h3 className="App__demo">DEMO Weather App</h3>
-      </div>
+      <Header
+        onSearchSelect={searchSelectHandler}
+        tab={tab}
+        unit={unit}
+        onTabChange={(data) => setTab(data)}
+        onUnitChange={(data) => setUnit(data)}
+      />
+      <Content
+        weather={weatherDate}
+        tab={tab}
+        location={location}
+        unit={unit}
+      />
+      <h3 className="App__demo">DEMO Weather App</h3>
+      <img className="App__line" src={lineImg} />
+      <img className="App__img" src={image} />
     </div>
   );
 }

@@ -1,42 +1,62 @@
 .current-weather {
   width: 32rem;
+  height: min-content;
 
-  .current-weather__title {
-    font-size: 2rem;
+  background-color: #424242;
+  color: #eeeeee;
+  border-radius: 1rem;
+
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+
+  .current-weather__header {
+    font-size: 1.2rem;
     font-weight: 600;
-    text-align: center;
 
-    color: #eeeeee;
+    border-bottom: rgba(18, 18, 18, 0.3) 4px solid;
+    padding: 1rem 2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .current-weather__icon {
+  }
+
+  .current-weather__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    padding: 1rem 2rem;
+  }
+
+  .current-weather__data__col {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
   }
 
   .current-weather__data {
-    display: grid;
+    font-size: 1rem;
 
-    /* From https://css.glass */
-    background: rgba(18, 18, 18, 0.4);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(8.3px);
-    -webkit-backdrop-filter: blur(8.3px);
-    border: 1px solid rgba(18, 18, 18, 0.3);
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+  }
 
-    color: #eeeeee;
+  .current-weather__sunrise {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 
-    .current-weather__data__header {
-      width: 100%;
-      border-bottom: rgba(18, 18, 18, 0.3) 1px solid;
+    padding: 1rem 2rem;
 
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      text-align: center;
-    }
-
-    .current-weather__data__row {
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      text-align: center;
-      padding: 4px 0;
-    }
+    align-items: center;
+    gap: 8px;
   }
 }

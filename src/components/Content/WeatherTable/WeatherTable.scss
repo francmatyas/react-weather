@@ -6,13 +6,8 @@
   display: grid;
 
   .weather-table__table {
-    /* From https://css.glass */
-    background: rgba(18, 18, 18, 0.4);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(8.3px);
-    -webkit-backdrop-filter: blur(8.3px);
-    border: 1px solid rgba(18, 18, 18, 0.3);
+    background-color: #424242;
+    border-radius: 1rem;
   }
 
   .weather-table__header {
@@ -23,13 +18,11 @@
     text-align: center;
   }
 
-  .weather-table__date{
+  .weather-table__date {
     font-size: 1rem;
     font-weight: 600;
     padding: 4px 0;
 
     transform: translate(1rem, 0);
   }
-
-
 }
