@@ -1,7 +1,9 @@
 import "./Header.scss";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
 import SearchBox from "./SearchBox/SearchBox";
 import UnitSwitch from "./UnitSwitch";
-import { Stack } from "@mui/material";
 
 import { HiOutlineCloud, HiOutlineTable } from "react-icons/hi";
 
@@ -10,11 +12,15 @@ function Header(props) {
 
   return (
     <div id="header">
-      <Stack direction="row" spacing={4} alignItems="center">
+      <div className="header__container">
         <SearchBox onSearchSelect={props.onSearchSelect} />
         <UnitSwitch unit={props.unit} onUnitChange={props.onUnitChange} />
-      </Stack>
+      </div>
+
       <nav id="header__navbar">
+        {/* <Link to="/"> <HiOutlineCloud size={24} /> Forecast </Link>
+        <Link to="/table"> <HiOutlineTable size={24} /> Table </Link> */}
+
         <button
           onClick={() => props.onTabChange("forecast")}
           className={tab === "forecast" && "header__navbar__selected"}

@@ -1,0 +1,11 @@
+#footer{
+    grid-row: footer-start / footer-end;
+    z-index: 3;
+    padding: 8px;
+  
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  
+    font-size: small;
+}

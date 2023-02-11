@@ -1,0 +1,64 @@
+.tutorial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  opacity: 0.75;
+
+  .tutorial__title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #017af2;
+  }
+
+  .tutorial__subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #424242;
+  }
+
+  ol.tutorial__list {
+    .tutorial__item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 1rem;
+
+      span {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      .tutorial__search {
+        width: min-content;
+        justify-self: center;
+
+        padding: 4px 1rem;
+        border-radius: 16px;
+        border: 1px solid #017af2;
+        color: #017af2;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .tutorial__forecast {
+        width: min-content;
+        justify-self: center;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+    }
+  }
+}

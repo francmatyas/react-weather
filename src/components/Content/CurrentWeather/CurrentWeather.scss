@@ -21,7 +21,13 @@
     align-items: center;
   }
 
-  .current-weather__icon {
+  .current-weather__description{
+    font-size: 1rem;
+    font-weight: 600;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .current-weather__container {
@@ -34,22 +40,32 @@
   }
 
   .current-weather__data__col {
+    min-width: 10rem;
+
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
     gap: 8px;
   }
 
   .current-weather__data {
     font-size: 1rem;
+    font-weight: 500;
 
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .current-weather__row{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     gap: 8px;
   }
 
-  .current-weather__sunrise {
+  .current-weather__footer {
     display: flex;
     flex-direction: row;
     justify-content: space-around;

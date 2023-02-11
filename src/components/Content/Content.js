@@ -1,13 +1,25 @@
 import "./Content.scss";
 
+import {
+  
+  Routes,
+  Route,
+} from 'react-router-dom';
+
 import CurrentWeather from "./CurrentWeather/CurrentWeather";
 import WeatherTable from "./WeatherTable/WeatherTable";
+import Tutorial from "./Tutorial/Tutorial";
+
 import { Stack, Skeleton } from "@mui/material";
 
 function Content(props) {
   const weather = props.weather;
 
   if (weather.length === 0) {
+    return <Tutorial />;
+  }
+
+  if (props.loader || props.twilights.length === 0) {
     return (
       <div className="content">
         <Stack spacing={1}>
@@ -32,7 +44,12 @@ function Content(props) {
     <div className="content">
       <div className="weather">
         {props.tab === "forecast" ? (
-          <CurrentWeather weather={weather[0][0]} location={props.location} unit={props.unit}/>
+          <CurrentWeather
+            weather={weather[0][0]}
+            twilight={props.twilights[0]}
+            location={props.location}
+            unit={props.unit}
+          />
         ) : (
           <div className="weather__table">
             {weather.map((element) => (

@@ -1,55 +1,35 @@
 import "./CurrentWeather.scss";
-import { toFahrenheit } from "../../../scripts/UnitConverter";
+import { toFahrenheit, getHourMins } from "../../../scripts/UnitConverter";
+import { getWeatherIcon } from "../../../scripts/WeatherIcon";
 
 import {
-  WiCloudy,
-  WiCloudyGusts,
-  WiCloudyWindy,
-  WiDayCloudyGusts,
-  WiDayCloudyHigh,
-  WiDayCloudyWindy,
-  WiDayCloudy,
-  WiDayFog,
-  WiDayHail,
-  WiDayHaze,
-  WiDayLightWind,
-  WiDayLightning,
-  WiDayRainMix,
-  WiDayRainWind,
-  WiDayRain,
-  WiDayShowers,
-  WiDaySleetStorm,
-  WiDaySleet,
-  WiDaySnowThunderstorm,
-  WiDaySnowWind,
-  WiDaySnow,
-  WiDaySprinkle,
-  WiDayStormShowers,
-  WiDaySunnyOvercast,
-  WiDaySunny,
-  WiDayThunderstorm,
-  WiDayWindy,
+  WiSunrise,
+  WiSunset,
+  WiHumidity,
+  WiThermometerExterior,
+  WiUmbrella,
+  WiTornado,
 } from "react-icons/wi";
-
-import { TbTemperature, TbUmbrella } from "react-icons/tb";
-import { FiSunrise, FiSunset } from "react-icons/fi";
+import { HiOutlineArrowNarrowDown } from "react-icons/hi";
+import weatherLegend from "../../../assets/data/weatherLegend.json";
 
 function CurrentWeather(props) {
   const weather = props.weather;
-  const sunriseDate = new Date(props.sunrise);
-  const sunsetDate = new Date(props.sunset);
-  const sunrise = sunriseDate.getHours() + ":" + sunriseDate.getMinutes();
-  const sunset = sunsetDate.getHours() + ":" + sunsetDate.getMinutes();
+  const [sunrise, sunset] = props.twilight;
+
+  const weatherCode = weather.data.next_1_hours.summary.symbol_code;
+  const weatherDescription = weatherLegend[weatherCode.split("_")[0]]?.desc_en;
 
   const temp = weather.data.instant.details.air_temperature;
-  const tempCelsius = Math.round(temp);
-  const tempFahrenheit = Math.round(toFahrenheit(temp));
+  const tempCelsius = Math.round(temp) + "°C";
+  const tempFahrenheit = Math.round(toFahrenheit(temp)) + "°F";
 
   const precipitation = weather.data.next_1_hours.details.precipitation_amount;
 
-  if (!weather || !sunset || !sunrise) {
-    return <div>Loading...</div>;
-  }
+  const windSpeed = weather.data.instant.details.wind_speed;
+  const windDirection = weather.data.instant.details.wind_from_direction;
+
+  const humidity = weather.data.instant.details.relative_humidity;
 
   return (
     <div className="current-weather">
@@ -58,33 +38,51 @@ function CurrentWeather(props) {
       </div>
 
       <div className="current-weather__container">
-        <div className="current-weather__icon">
-          <WiDayCloudy size={128} />
+        <div className="current-weather__data__col">
+          <span className="current-weather__description">
+            {weatherDescription}
+          </span>
+          <div className="current-weather__icon">
+            {getWeatherIcon(weatherCode, 128)}
+          </div>
         </div>
 
-        <div className="current-weather__data">
-          <div className="current-weather__data__col">
-            <span className="current-weather__data">
-              <TbTemperature size={32} />
-              {props.unit === "celsius"
-                ? tempCelsius + " °C"
-                : tempFahrenheit + " °F"}
+        <div className="current-weather__data__col">
+          <span className="current-weather__data">
+            <WiThermometerExterior size={32} />
+            <span style={{ color: temp > 0 ? "#f44336" : "#03a9f4" }}>
+              {props.unit === "celsius" ? tempCelsius : tempFahrenheit}
             </span>
-            <span className="current-weather__data">
-              <TbUmbrella size={32} />
-              {precipitation + " mm"}
-            </span>
-          </div>
+          </span>
+
+          <span className="current-weather__data">
+            <WiUmbrella size={32} />
+            <span>{precipitation + " mm"}</span>
+          </span>
+
+          <span className="current-weather__data">
+            <WiTornado size={32} />
+            <span>{windSpeed + " m/s"}</span>
+            <HiOutlineArrowNarrowDown
+              size={24}
+              style={{ transform: `rotate(${windDirection}deg)` }}
+            />
+          </span>
+
+          <span className="current-weather__data">
+            <WiHumidity size={32} />
+            <span>{humidity + "%"}</span>
+          </span>
         </div>
       </div>
 
-      <div className="current-weather__sunrise">
-        <span className="current-weather__data">
-          <FiSunrise size={24} />
+      <div className="current-weather__footer">
+        <span className="current-weather__row">
+          <WiSunrise size={24} />
           {sunrise}
         </span>
-        <span className="current-weather__data">
-          <FiSunset size={24} />
+        <span className="current-weather__row">
+          <WiSunset size={24} />
           {sunset}
         </span>
       </div>

@@ -2,11 +2,13 @@ import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { useState, useEffect } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import Content from "./components/Content/Content";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import AppDesign from "./components/Design/AppDesign";
 
-import lineImg from "./assets/svgs/line.svg";
 import summerImg from "./assets/svgs/summer.svg";
 import winterImg from "./assets/svgs/winter.svg";
 import rainImg from "./assets/svgs/rain.svg";
@@ -16,15 +18,19 @@ function App() {
   const [tab, setTab] = useState("forecast");
   const [unit, setUnit] = useState("celsius");
 
+  const [loader, setLoader] = useState(false);
   const [location, setLocation] = useState({});
   const [weather, setWeather] = useState({});
   const [weatherDate, setWeatherDate] = useState([]);
+  const [twilights, setTwilights] = useState([]);
 
   const [image, setImage] = useState(hikingImg);
 
   function searchSelectHandler(location) {
     setLocation(location);
   }
+
+  // useEffect change image based on current temp and precipitation for selected location
 
   useEffect(() => {
     if (weatherDate.length !== 0) {
@@ -44,19 +50,11 @@ function App() {
     }
   }, [weatherDate]);
 
-  /*   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setLat(position.coords.latitude);
-        setLon(position.coords.longitude);
-      });
-    } else {
-      setStatus("Geolocation is not supported by this browser.");
-    }
-  }, []); */
+  // useEffect fetch weather data for selected location
 
   useEffect(() => {
     if (location.lat && location.lon) {
+      setLoader(true);
       fetch(
         `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${location.lat}&lon=${location.lon}`,
         {
@@ -68,40 +66,12 @@ function App() {
         .then((response) => response.json())
         .then((data) => {
           setWeather(data);
+          setLoader(false);
         });
     }
   }, [location]);
 
-  /* useEffect(() => {
-    if (lat && lon) {
-      const datetime = new Date();
-      const year = datetime.getFullYear();
-      const month = datetime.getMonth() + 1;
-      const day = datetime.getDate();
-      const date = year + "-" + (month > 9 ? month : "0" + month) + "-" + day;
-      const offsetNumeric = -(datetime.getTimezoneOffset() / 60);
-      const offset =
-        (offsetNumeric > 0 ? "+" : "-") +
-        (Math.abs(offsetNumeric) > 9
-          ? Math.abs(offsetNumeric)
-          : "0" + Math.abs(offsetNumeric)) +
-        ":00";
-
-      fetch(
-        `https://api.met.no/weatherapi/sunrise/2.0/.json?lat=${lat}&lon=${lon}&date=${date}&offset=${offset}`,
-        {
-          headers: {
-            "User-Agent": "demo-weather-app, github.com/francmatyas",
-          },
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setSunrise(data.location.time[0].sunrise.time);
-          setSunset(data.location.time[0].sunset.time);
-        });
-    }
-  }, [lat, lon]); */
+  // useEffect format weather data for each day
 
   useEffect(() => {
     if (Object.getOwnPropertyNames(weather).length !== 0) {
@@ -123,29 +93,64 @@ function App() {
         },
         {}
       );
+
       setWeatherDate(Object.values(weatherDate));
     }
-  }, [weather]);
+  }, [weather, location]);
+
+  // useEffect fetch sunrise and sunset time for selected location
+
+  useEffect(() => {
+    if (location.lat && location.lon && weatherDate.length !== 0) {
+      setLoader(true);
+      Promise.all(
+        weatherDate.map((element) => {
+          const date = element[0].time;
+
+          return fetch(
+            `https://api.sunrisesunset.io/json?lat=${location.lat}&lng=${
+              location.lon
+            }&date=${date.split("T")[0]}`,
+            {
+              headers: {
+                "User-Agent": "demo-weather-app, github.com/francmatyas",
+              },
+            }
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              return [data.results.sunrise, data.results.sunset];
+            });
+        })
+      ).then((data) => {
+        setLoader(false);
+        setTwilights(data);
+      });
+    }
+  }, [weatherDate, location]);
 
   return (
-    <div className="App">
-      <Header
-        onSearchSelect={searchSelectHandler}
-        tab={tab}
-        unit={unit}
-        onTabChange={(data) => setTab(data)}
-        onUnitChange={(data) => setUnit(data)}
-      />
-      <Content
-        weather={weatherDate}
-        tab={tab}
-        location={location}
-        unit={unit}
-      />
-      <h3 className="App__demo">DEMO Weather App</h3>
-      <img className="App__line" src={lineImg} />
-      <img className="App__img" src={image} />
-    </div>
+    <Router>
+      <div className="App">
+        <Header
+          onSearchSelect={searchSelectHandler}
+          tab={tab}
+          unit={unit}
+          onTabChange={(data) => setTab(data)}
+          onUnitChange={(data) => setUnit(data)}
+        />
+        <Content
+          weather={weatherDate}
+          tab={tab}
+          location={location}
+          unit={unit}
+          loader={loader}
+          twilights={twilights}
+        />
+        <AppDesign image={image} />
+        <Footer />
+      </div>
+    </Router>
   );
 }
 

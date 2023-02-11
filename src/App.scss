@@ -3,41 +3,7 @@
   height: 100vh;
 
   display: grid;
-  grid-template-rows: [header-start] min-content [header-end content-start] auto [content-end];
+  grid-template-rows: [header-start] min-content [header-end content-start] auto [content-end footer-start] min-content [footer-end];
 
   overflow: hidden;
-
-  .App__line {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    height: 100%;
-  }
-
-  .App__img{
-    position: absolute;
-    bottom: 0;
-    left: 1rem;
-    width: 20rem;
-  }
-
-  .App__demo {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    z-index: 2;
-
-    padding: 0 1rem;
-    opacity: 0.25;
-  }
-}
-
-.App__loader {
-  background-color: rgba(0, 0, 0, 0.5);
-  height: 100vh;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
