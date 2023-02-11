@@ -1,0 +1,57 @@
+.weather-page {
+
+  width: 32rem;
+
+  color: #eeeeee;
+
+  display: grid;
+
+  .weather-page__table {
+    background-color: #424242;
+    border-radius: 1rem;
+  }
+
+  .weather-page__header {
+    padding: 8px;
+
+    border-bottom: rgba(18, 18, 18, 0.3) 1px solid;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    text-align: center;
+  }
+
+  .weather-page__date {
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 4px 0;
+    color: #424242;
+
+
+    transform: translate(1rem, 0);
+  }
+
+  .weather-page__rows {
+    padding: 8px;
+
+    max-height: 20rem;
+    overflow: scroll;
+  }
+
+  .weather-page__footer{
+    border-top: rgba(18, 18, 18, 0.3) 1px solid;
+    
+    padding: 8px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .weather-page__footer__row{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+}

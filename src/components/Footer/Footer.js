@@ -6,7 +6,10 @@ function Footer() {
   return (
     <footer id="footer">
       <span>
-        Data from The Norwegian Meteorological Institute{" "}
+        Data from{" "}
+        <a rel="author" href="https://www.met.no/en">
+          The Norwegian Meteorological Institute
+        </a>{" "}
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
           <GrCreativeCommons size={16} />
         </a>
@@ -15,6 +18,12 @@ function Footer() {
         Powered by{" "}
         <a rel="author" href="https://sunrisesunset.io/">
           SunriseSunset.io
+        </a>
+      </span>
+      <span>
+        Search powered by{" "}
+        <a rel="author" href="https://www.openstreetmap.org/copyright">
+          OpenStreetMap
         </a>
       </span>
     </footer>

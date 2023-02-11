@@ -1,5 +1,5 @@
 import "./CurrentWeather.scss";
-import { toFahrenheit, getHourMins } from "../../../scripts/UnitConverter";
+import { toFahrenheit } from "../../../scripts/UnitConverter";
 import { getWeatherIcon } from "../../../scripts/WeatherIcon";
 
 import {
@@ -15,6 +15,7 @@ import weatherLegend from "../../../assets/data/weatherLegend.json";
 
 function CurrentWeather(props) {
   const weather = props.weather;
+  const location = props.location;
   const [sunrise, sunset] = props.twilight;
 
   const weatherCode = weather.data.next_1_hours.summary.symbol_code;
@@ -34,7 +35,9 @@ function CurrentWeather(props) {
   return (
     <div className="current-weather">
       <div className="current-weather__header">
-        <span>{props.location.display_name}</span>
+        <span>
+          {location?.display_name}
+        </span>
       </div>
 
       <div className="current-weather__container">

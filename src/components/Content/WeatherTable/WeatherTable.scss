@@ -3,26 +3,9 @@
 
   color: #eeeeee;
 
-  display: grid;
-
-  .weather-table__table {
-    background-color: #424242;
-    border-radius: 1rem;
-  }
-
-  .weather-table__header {
-    border-bottom: rgba(18, 18, 18, 0.3) 1px solid;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    text-align: center;
-  }
-
-  .weather-table__date {
-    font-size: 1rem;
-    font-weight: 600;
-    padding: 4px 0;
-
-    transform: translate(1rem, 0);
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }

@@ -1,10 +1,6 @@
 import "./Content.scss";
 
-import {
-  
-  Routes,
-  Route,
-} from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
 
 import CurrentWeather from "./CurrentWeather/CurrentWeather";
 import WeatherTable from "./WeatherTable/WeatherTable";
@@ -19,7 +15,7 @@ function Content(props) {
     return <Tutorial />;
   }
 
-  if (props.loader || props.twilights.length === 0) {
+  if (props.loader || props.twilights.length === 0 || !props.location) {
     return (
       <div className="content">
         <Stack spacing={1}>
@@ -43,20 +39,31 @@ function Content(props) {
   return (
     <div className="content">
       <div className="weather">
-        {props.tab === "forecast" ? (
-          <CurrentWeather
-            weather={weather[0][0]}
-            twilight={props.twilights[0]}
-            location={props.location}
-            unit={props.unit}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <CurrentWeather
+                weather={weather[0][0]}
+                twilight={props.twilights[0]}
+                location={props.location}
+                unit={props.unit}
+              />
+            }
           />
-        ) : (
-          <div className="weather__table">
-            {weather.map((element) => (
-              <WeatherTable weather={element} key={Math.random()} />
-            ))}
-          </div>
-        )}
+          <Route
+            exact
+            path="/table"
+            element={
+              <WeatherTable
+                weather={weather}
+                unit={props.unit}
+                location={props.location}
+                twilights={props.twilights}
+              />
+            }
+          />
+        </Routes>
       </div>
     </div>
   );

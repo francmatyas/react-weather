@@ -226,5 +226,8 @@ export function getWeatherIcon(code, size) {
 
     case "snowshowersandthunder_day":
       return <WiDaySnowThunderstorm size={size} />;
+
+    default:
+      return <WiDaySunny size={size} />;
   }
 }
