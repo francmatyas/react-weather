@@ -1,8 +1,8 @@
 import "./WeatherRow.scss";
-import { getWeatherIcon } from "../../../../scripts/WeatherIcon";
-import { toFahrenheit } from "../../../../scripts/UnitConverter";
+import { getWeatherIcon, toFahrenheit } from "../../../../scripts/WeatherUtils";
 import weatherLegend from "../../../../assets/data/weatherLegend.json";
 import { Tooltip } from "@mui/material";
+import { HiOutlineArrowNarrowDown } from "react-icons/hi";
 
 function WeatherRow(props) {
   const weather = props.weather;
@@ -14,6 +14,7 @@ function WeatherRow(props) {
 
   const precipitation = getPrecipitation();
   const windSpeed = Math.round(weather.data.instant.details.wind_speed);
+  const windDirection = weather.data.instant.details.wind_from_direction;
 
   const weatherCode = getWeatherCode();
   const icon = getWeatherIcon(weatherCode, 32);
@@ -53,7 +54,13 @@ function WeatherRow(props) {
       <span className="weather-row__precipitation">
         {precipitation !== 0 && precipitation ? precipitation + " mm" : ""}
       </span>
-      <span className="weather-row__wind">{windSpeed} m/s</span>
+      <span className="weather-row__wind">
+        {windSpeed} m/s{" "}
+        <HiOutlineArrowNarrowDown
+          size={24}
+          style={{ transform: `rotate(${windDirection}deg)` }}
+        />
+      </span>
     </div>
   );
 }

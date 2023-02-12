@@ -39,6 +39,61 @@ import {
   WiNightClear,
 } from "react-icons/wi";
 
+export function getLocationName(location) {
+  const country = location.address.country;
+  if (location.address.city) {
+    return `${location.address.city}, ${country}`;
+  } else if (location.address.town) {
+    return `${location.address.town}, ${country}`;
+  } else if (location.address.village) {
+    return `${location.address.village}, ${country}`;
+  } else if (location.address.hamlet) {
+    return `${location.address.hamlet}, ${country}`;
+  } else if (location.address.administrative) {
+    return `${location.address.administrative}, ${country}`;
+  }
+
+  return location.display_name;
+}
+
+export function toFahrenheit(celsius) {
+  return (celsius * 9) / 5 + 32;
+}
+
+export function correctHour(hour) {
+  if (hour < 10) {
+    return "0" + hour;
+  }
+  return hour;
+}
+
+export function formatDateGap(weather) {
+  if (weather.length !== 0) {
+    if (weather.length === 1) {
+      weather[0]["hour"] = correctHour(new Date(weather[0].time).getHours());
+    }
+
+    for (let i = 0; i < weather.length - 1; i++) {
+      const time = new Date(weather[i].time).getHours();
+      const nextTime = new Date(weather[i + 1].time).getHours();
+      if (time === nextTime - 1) {
+        weather[i]["hour"] = correctHour(time);
+      } else {
+        weather[i]["hour"] = correctHour(time) + " - " + correctHour(nextTime);
+      }
+
+      if (i === weather.length - 2) {
+        if (time === nextTime - 1) {
+          weather[i + 1]["hour"] = correctHour(nextTime);
+        } else {
+          weather[i + 1]["hour"] =
+            correctHour(nextTime) + " - " + correctHour((nextTime + 6) % 24);
+        }
+      }
+    }
+  }
+}
+
 export function getWeatherIcon(code, size) {
   switch (code) {
     case "clearsky_night":

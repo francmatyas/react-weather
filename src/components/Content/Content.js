@@ -29,7 +29,7 @@ function Content(props) {
             animation="wave"
             variant="rounded"
             width={512}
-            height={200}
+            height={240}
           />
         </Stack>
       </div>
