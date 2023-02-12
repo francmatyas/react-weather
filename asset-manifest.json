@@ -1,16 +1,20 @@
 {
   "files": {
-    "main.css": "/react-weather/static/css/main.caa1e002.css",
-    "main.js": "/react-weather/static/js/main.d5f3a15f.js",
+    "main.css": "/react-weather/static/css/main.9ab713f0.css",
+    "main.js": "/react-weather/static/js/main.5d4a0289.js",
     "static/js/787.921a87ab.chunk.js": "/react-weather/static/js/787.921a87ab.chunk.js",
-    "static/media/landscape.jpg": "/react-weather/static/media/landscape.0726fdd7f48570c49b81.jpg",
+    "static/media/rain.svg": "/react-weather/static/media/rain.ccccc81bf1b55641d9f0d0d5c96b3c85.svg",
+    "static/media/winter.svg": "/react-weather/static/media/winter.0fa9b0484208fb6baf224276599eaef7.svg",
+    "static/media/summer.svg": "/react-weather/static/media/summer.6982554964e6178e2e17581e613ab6c6.svg",
+    "static/media/hiking.svg": "/react-weather/static/media/hiking.0a4e07056cbff3770afd3244f7fa6d62.svg",
     "index.html": "/react-weather/index.html",
-    "main.caa1e002.css.map": "/react-weather/static/css/main.caa1e002.css.map",
-    "main.d5f3a15f.js.map": "/react-weather/static/js/main.d5f3a15f.js.map",
+    "static/media/line.svg": "/react-weather/static/media/line.ea352ad406ee872b396ecc4e5e804100.svg",
+    "main.9ab713f0.css.map": "/react-weather/static/css/main.9ab713f0.css.map",
+    "main.5d4a0289.js.map": "/react-weather/static/js/main.5d4a0289.js.map",
     "787.921a87ab.chunk.js.map": "/react-weather/static/js/787.921a87ab.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.caa1e002.css",
-    "static/js/main.d5f3a15f.js"
+    "static/css/main.9ab713f0.css",
+    "static/js/main.5d4a0289.js"
   ]
 }
