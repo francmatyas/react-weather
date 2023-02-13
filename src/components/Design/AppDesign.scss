@@ -4,29 +4,29 @@
   bottom: 0;
   left: 0;
   right: 0;
-}
 
-#app-design__line {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  height: 100%;
-}
-
-#app-design__img {
-  position: absolute;
-  bottom: 0;
-  left: 1rem;
-  width: 20rem;
-}
-
-#app-design__demo {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  z-index: 2;
-
-  padding: 0 1rem;
-  opacity: 0.25;
+  #app-design__line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+  }
+  
+  #app-design__img {
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+    width: 20rem;
+  }
+  
+  #app-design__demo {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+  
+    padding: 0 1rem;
+    opacity: 0.25;
+  }
 }

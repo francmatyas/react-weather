@@ -1,4 +1,4 @@
-.content {
+#content {
   grid-row: content-start / content-end;
   padding: 2rem;
   padding-bottom: 4rem;
@@ -10,18 +10,14 @@
   align-items: center;
 }
 
-.weather {
+#weather {
   height: 100%;
+
+  background-color: transparent;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: transparent;
-
-  .weather__table {
-    height: 100rem;
-
-    overflow: scroll;
-  }
 }
+

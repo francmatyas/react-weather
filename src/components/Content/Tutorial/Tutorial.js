@@ -6,19 +6,19 @@ import { WiDayCloudy, WiRain, WiSnow } from "react-icons/wi";
 
 function Tutorial() {
   return (
-    <div className="content">
-      <div className="tutorial">
+    <div id="content">
+      <div id="tutorial">
         <Stack>
-          <h1 className="tutorial__title">SkySight</h1>
-          <h2 className="tutorial__subtitle">
+          <h1 id="tutorial__title">SkySight</h1>
+          <h2 id="tutorial__subtitle">
             <span>Never Get Caught in the Rain Again</span>
           </h2>
         </Stack>
-        <ol className="tutorial__list">
+        <ol id="tutorial__list">
           <li>
             <div className="tutorial__item">
               <span>Enter your location:</span>
-              <div className="tutorial__search">
+              <div id="tutorial__search">
                 <span>Find place</span> <HiOutlineCursorClick size={16} />
               </div>
             </div>
@@ -26,7 +26,7 @@ function Tutorial() {
           <li>
             <div className="tutorial__item">
               <span>Get the forecast:</span>
-              <div className="tutorial__forecast">
+              <div id="tutorial__forecast">
                 <WiDayCloudy size={32} />
                 <WiRain size={32} />
                 <WiSnow size={32} />

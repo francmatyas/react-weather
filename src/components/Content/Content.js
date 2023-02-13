@@ -17,7 +17,7 @@ function Content(props) {
 
   if (props.loader || props.twilights.length === 0 || !props.location) {
     return (
-      <div className="content">
+      <div id="content">
         <Stack spacing={1}>
           <Skeleton
             animation="wave"
@@ -37,14 +37,14 @@ function Content(props) {
   }
 
   return (
-    <div className="content">
-      <div className="weather">
+    <div id="content">
+      <div id="weather">
         <Routes>
           <Route
             path="/"
             element={
               <CurrentWeather
-                weather={weather[0][0]}
+                weather={weather[0][0].data}
                 twilight={props.twilights[0]}
                 location={props.location}
                 unit={props.unit}

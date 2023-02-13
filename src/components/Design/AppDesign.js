@@ -6,7 +6,7 @@ function AppDesign(props) {
   return (
     <div id="app-design">
       <h3 id="app-design__demo">DEMO Weather App</h3>
-      <img id="app-design__line" src={lineImg} alt="design line"/>
+      <img id="app-design__line" src={lineImg} alt="line"/>
       <img id="app-design__img" src={props.image} alt="descripes weather"/>
     </div>
   );

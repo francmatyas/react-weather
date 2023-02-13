@@ -11,6 +11,9 @@ function SearchBox(props) {
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
+  // fetch search results from nominatim api
+  // https://nominatim.org/release-docs/develop/api/Search/
+
   function searchHandler() {
     const params = {
       q: searchText,
@@ -34,7 +37,8 @@ function SearchBox(props) {
         });
   }
 
-  // get current location
+  // get current location and fetch city name from nominatim api
+  // https://nominatim.org/release-docs/develop/api/Reverse/
 
   function getLocationHandler() {
     if (navigator.geolocation) {
@@ -72,7 +76,6 @@ function SearchBox(props) {
         getCityName().then((data) => {
           props.onSearchSelect(data);
         });
-       
       });
     } else {
       alert("Geolocation is not supported by this browser.");
@@ -102,8 +105,8 @@ function SearchBox(props) {
         }
       }}
     >
-      <div className="search-box">
-        <div className="search-box__header">
+      <div id="search-box">
+        <div id="search-box__header">
           <input
             onChange={(event) => setSearchText(event.target.value)}
             type="text"
@@ -119,10 +122,10 @@ function SearchBox(props) {
         </div>
 
         {searchResults.length === 0 ? (
-          <div className="search-box__noresult"></div>
+          <div id="search-box__noresult"></div>
         ) : (
-          <div className="search-box__table">
-            <div className="search-box__results">
+          <div id="search-box__table">
+            <div id="search-box__results">
               {searchResults.map((result) => (
                 <div
                   className="search-box__item"
@@ -134,9 +137,7 @@ function SearchBox(props) {
                   }}
                 >
                   <HiOutlineLocationMarker size={24} />
-                  <div className="search-box__result__name">
-                    {result.display_name}
-                  </div>
+                  <span id="search-box__result__name">{result.display_name}</span>
                 </div>
               ))}
             </div>

@@ -1,4 +1,4 @@
-.tutorial {
+#tutorial {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,19 +7,19 @@
 
   opacity: 0.75;
 
-  .tutorial__title {
+  #tutorial__title {
     font-size: 2.5rem;
     font-weight: 600;
     color: #017af2;
   }
 
-  .tutorial__subtitle {
+  #tutorial__subtitle {
     font-size: 1.5rem;
     font-weight: 600;
     color: #424242;
   }
 
-  ol.tutorial__list {
+  ol#tutorial__list {
     .tutorial__item {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -33,7 +33,7 @@
         justify-content: flex-start;
       }
 
-      .tutorial__search {
+      #tutorial__search {
         width: min-content;
         justify-self: center;
 
@@ -49,7 +49,7 @@
         gap: 1rem;
       }
 
-      .tutorial__forecast {
+      #tutorial__forecast {
         width: min-content;
         justify-self: center;
 

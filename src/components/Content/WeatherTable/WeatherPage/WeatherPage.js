@@ -1,5 +1,8 @@
 import "./WeatherPage.scss";
-import { formatDateGap, getLocationName } from "../../../../scripts/WeatherUtils";
+import {
+  formatDateGap,
+  getLocationName,
+} from "../../../../scripts/WeatherUtils";
 
 import {
   WiSunrise,
@@ -17,8 +20,6 @@ function WeatherPage(props) {
   const location = getLocationName(props.location);
   const [sunrise, sunset] = props.twilight;
 
-  console.log(props.location)
-
   const date = new Date(weather[0].time);
   const day = date.toLocaleDateString("en-GB", {
     weekday: "long",
@@ -31,8 +32,7 @@ function WeatherPage(props) {
   return (
     <div id="weather-page">
       <div id="weather-page__header">
-      <span id="weather-page__location">{location}</span>
-      <span id="weather-page__date">{day}</span>
+        <span id="weather-page__location">{location}</span>
       </div>
 
       <div id="weather-page__table">
@@ -40,7 +40,9 @@ function WeatherPage(props) {
           <span id="weather-page__header__time">
             <WiTime8 size={32} />
           </span>
-          <span id="weather-page__header__icon"></span>
+          <span id="weather-page__header__icon">
+            {/* Filler span for grid */}
+          </span>
           <span id="weather-page__header__temp">
             <WiThermometerExterior size={32} />
           </span>
@@ -51,6 +53,7 @@ function WeatherPage(props) {
             <WiTornado size={32} />
           </span>
         </div>
+
         <div className="weather-page__rows">
           {weather.map((element) => (
             <WeatherRow
@@ -60,7 +63,8 @@ function WeatherPage(props) {
             />
           ))}
         </div>
-        <div id="weather-page__footer">
+
+        <div id="weather-page__table__footer">
           <span className="weather-page__footer__row">
             <WiSunrise size={24} />
             {sunrise}
@@ -70,6 +74,10 @@ function WeatherPage(props) {
             {sunset}
           </span>
         </div>
+      </div>
+
+      <div id="weather-page__footer">
+        <span id="weather-page__date">{day}</span>
       </div>
     </div>
   );

@@ -12,7 +12,7 @@
   justify-content: space-between;
   gap: 2rem;
 
-  .header__container {
+  #header__container {
     display: flex;
     flex-direction: row;
     gap: 2rem;
@@ -57,20 +57,5 @@
     .header__unit__selected {
       color: #017af2;
     }
-  }
-
-  .header__button {
-    width: 2rem;
-    height: 2rem;
-    background-color: #017af2;
-    color: #ffffff;
-    border-radius: 50%;
-    border: none;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    transition: 0.3s;
   }
 }

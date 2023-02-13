@@ -3,6 +3,19 @@
   color: #fff;
   display: grid;
 
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: rgba($color: #424242, $alpha: 0.5);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #424242;
+    border-radius: 3px;
+  }
+
   #weather-page__header {
     color: #424242;
 
@@ -10,32 +23,26 @@
     flex-direction: column;
     align-items: center;
 
-    #weather-page__location{
-      font-size: 1.5rem;
-      font-weight: 600;
-      padding: 4px 0;
-    }
-    
-    #weather-page__date {
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 4px 0;
+    padding: 1rem;
 
-      align-self: flex-start;
-      margin-left: 1rem;
+    #weather-page__location {
+      font-size: 1.2rem;
+      font-weight: 600;
     }
   }
 
-  
-
   #weather-page__table {
-    background-color: #636363;
+    background-color: #fff;
     border-radius: 1rem;
+    border: #017af2 solid 4px;
+
+    display: grid;
+    grid-template-rows: min-content 1fr min-content;
 
     #weather-page__table__header {
+      background-color: #017af2;
       padding: 8px;
 
-      border-bottom: rgba(18, 18, 18, 0.3) 1px solid;
 
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -44,13 +51,14 @@
 
     .weather-page__rows {
       padding: 8px;
+      color: #424242;
 
       max-height: 20rem;
-      overflow: scroll;
+      overflow-y: auto;
     }
 
-    #weather-page__footer {
-      border-top: rgba(18, 18, 18, 0.3) 1px solid;
+    #weather-page__table__footer {
+      background-color: #017af2;
 
       padding: 8px;
 
@@ -64,6 +72,19 @@
         align-items: center;
         gap: 0.5rem;
       }
+    }
+  }
+
+  #weather-page__footer {
+    color: #424242;
+
+    #weather-page__date {
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 0;
+
+      align-self: flex-start;
+      margin-left: 1rem;
     }
   }
 }

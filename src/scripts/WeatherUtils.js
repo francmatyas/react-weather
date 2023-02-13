@@ -94,6 +94,28 @@ export function formatDateGap(weather) {
   }
 }
 
+export function getPrecipitation(weather) {
+  if (weather.next_1_hours !== undefined) {
+    return weather.next_1_hours.details.precipitation_amount;
+  } else if (weather.next_3_hours !== undefined) {
+    return weather.next_3_hours.details.precipitation_amount;
+  } else if (weather.next_6_hours !== undefined) {
+    return weather.next_6_hours.details.precipitation_amount;
+  }
+}
+
+export function getWeatherCode(weather) {
+  if (weather.next_1_hours !== undefined) {
+    return weather.next_1_hours.summary.symbol_code;
+  } else if (weather.next_3_hours !== undefined) {
+    return weather.next_3_hours.summary.symbol_code;
+  } else if (weather.next_6_hours !== undefined) {
+    return weather.next_6_hours.summary.symbol_code;
+  } else {
+    return "";
+  }
+}
+
 export function getWeatherIcon(code, size) {
   switch (code) {
     case "clearsky_night":

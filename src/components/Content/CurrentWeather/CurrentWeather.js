@@ -21,34 +21,34 @@ function CurrentWeather(props) {
   const location = getLocationName(props.location);
   const [sunrise, sunset] = props.twilight;
 
-  const weatherCode = weather.data.next_1_hours.summary.symbol_code;
+  const weatherCode = weather.next_1_hours.summary.symbol_code;
   const weatherDescription = weatherLegend[weatherCode.split("_")[0]]?.desc_en;
 
-  const temp = weather.data.instant.details.air_temperature;
+  const temp = weather.instant.details.air_temperature;
   const tempCelsius = Math.round(temp) + "°C";
   const tempFahrenheit = Math.round(toFahrenheit(temp)) + "°F";
 
-  const precipitation = weather.data.next_1_hours.details.precipitation_amount;
+  const precipitation = weather.next_1_hours.details.precipitation_amount;
 
-  const windSpeed = weather.data.instant.details.wind_speed;
-  const windDirection = weather.data.instant.details.wind_from_direction;
+  const windSpeed = weather.instant.details.wind_speed;
+  const windDirection = weather.instant.details.wind_from_direction;
 
-  const humidity = weather.data.instant.details.relative_humidity;
+  const humidity = weather.instant.details.relative_humidity;
 
   return (
-    <div className="current-weather">
-      <div className="current-weather__header">
+    <div id="current-weather">
+      <div id="current-weather__header">
         <span>{location}</span>
       </div>
 
-      <div className="current-weather__container">
+      <div id="current-weather__container">
         <div className="current-weather__data__col">
-          <span className="current-weather__description">
+          <span id="current-weather__description">
             {weatherDescription}
           </span>
-          <div className="current-weather__icon">
+          <span id="current-weather__icon">
             {getWeatherIcon(weatherCode, 128)}
-          </div>
+          </span>
         </div>
 
         <div className="current-weather__data__col">
@@ -61,12 +61,12 @@ function CurrentWeather(props) {
 
           <span className="current-weather__data">
             <WiUmbrella size={32} />
-            <span>{precipitation + " mm"}</span>
+            {precipitation + " mm"}
           </span>
 
           <span className="current-weather__data">
             <WiTornado size={32} />
-            <span>{windSpeed + " m/s"}</span>
+            {windSpeed + " m/s"}
             <HiOutlineArrowNarrowDown
               size={24}
               style={{ transform: `rotate(${windDirection}deg)` }}
@@ -75,12 +75,12 @@ function CurrentWeather(props) {
 
           <span className="current-weather__data">
             <WiHumidity size={32} />
-            <span>{humidity + "%"}</span>
+            {humidity + "%"}
           </span>
         </div>
       </div>
 
-      <div className="current-weather__footer">
+      <div id="current-weather__footer">
         <span className="current-weather__row">
           <WiSunrise size={24} />
           {sunrise}
