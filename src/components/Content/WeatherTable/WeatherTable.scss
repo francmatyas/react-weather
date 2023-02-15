@@ -1,5 +1,5 @@
 #weather-table {
-  width: 32rem;
+  max-width: 32rem;
 
   color: #eeeeee;
 
@@ -8,4 +8,10 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
+}
+
+@media screen and (max-width: 767px){
+  #weather-table {
+      width: 100%;
+    }
 }

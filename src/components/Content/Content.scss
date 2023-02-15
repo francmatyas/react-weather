@@ -28,4 +28,13 @@
 }
 
 @media screen and (max-width: 767px) {
+  #content {
+    justify-content: align-start;
+    padding: 1rem;
+
+    #weather {
+      width: 100%;
+      justify-content: flex-start;
+    }
+  }
 }

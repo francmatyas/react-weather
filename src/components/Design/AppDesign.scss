@@ -62,19 +62,11 @@
     }
     
     #app-design__img {
-      width: 10rem;
+      display: none;
     }
 
     #app-design__demo {
-      font-size: medium;
-    }
-  }
-}
-
-@media screen and (max-height: 600px){
-  #app-design {
-    #app-design__img {
-     display: none;
+      display: none;
     }
   }
 }

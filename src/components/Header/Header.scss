@@ -18,38 +18,6 @@
     gap: 2rem;
   }
 
-  #header__navbar {
-    justify-self: flex-end;
-
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-
-    .header__link {
-      background-color: transparent;
-      border: none;
-
-      text-decoration: none;
-      color: #424242;
-      font-size: 1.2rem;
-      font-weight: 600;
-
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 0.5rem;
-
-      transition: 0.3s;
-
-      &:hover {
-        opacity: 0.8;
-      }
-      &.header__navbar__selected {
-        color: #017af2;
-      }
-    }
-  }
-
   #header__unit__switch {
     align-self: center;
     color: #424242;

@@ -1,5 +1,5 @@
 #current-weather {
-  width: 32rem;
+  max-width: 32rem;
   height: min-content;
 
   background-color: #fff;
@@ -89,5 +89,12 @@
 }
 
 @media screen and (max-width: 767px){
+  #current-weather {
+    #current-weather__container {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+  }
 
 }
