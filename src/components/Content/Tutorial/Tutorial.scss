@@ -25,6 +25,7 @@
       grid-template-columns: 1fr 1fr;
       align-items: center;
       gap: 1rem;
+      padding: 4px;
 
       span {
         display: flex;
@@ -60,5 +61,73 @@
         gap: 8px;
       }
     }
+  }
+}
+
+
+@media screen and (min-width: 1024px) {
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+}
+
+@media screen and (max-width: 767px) {
+  #tutorial {
+    padding: 1rem;
+
+    #tutorial__title {
+      font-size: 1.5rem;
+    }
+
+    #tutorial__subtitle {
+      font-size: 1.2rem;
+    }
+
+    ol#tutorial__list {
+      .tutorial__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 8px;
+
+        span {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+        }
+
+        #tutorial__search {
+          width: min-content;
+          justify-self: center;
+
+          padding: 4px 1rem;
+          border-radius: 16px;
+          border: 1px solid #017af2;
+          color: #017af2;
+
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
+        }
+
+        #tutorial__forecast {
+          width: min-content;
+          justify-self: center;
+
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+        }
+      }
+    }
+
+    
   }
 }

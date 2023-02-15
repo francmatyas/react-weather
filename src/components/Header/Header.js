@@ -1,5 +1,6 @@
 import "./Header.scss";
 import { Link, useLocation } from "react-router-dom";
+import { useMediaQuery } from 'react-responsive'
 
 import SearchBox from "./SearchBox/SearchBox";
 import UnitSwitch from "./UnitSwitch";
@@ -8,7 +9,16 @@ import { HiOutlineCloud, HiOutlineTable } from "react-icons/hi";
 
 function Header(props) {
   const path = useLocation().pathname;
-  console.log(path);
+
+  const isDesktop = useMediaQuery({
+    query: '(min-width: 1024px)'
+  })
+  const isTablet = useMediaQuery({
+    query: '(min-width: 768px) and (max-width: 1023px)'
+  })
+  const isMobile = useMediaQuery({
+    query: '(max-width: 767px)'
+  })
 
   return (
     <div id="header">
@@ -17,6 +27,7 @@ function Header(props) {
         <UnitSwitch unit={props.unit} onUnitChange={props.onUnitChange} />
       </div>
 
+      {(isDesktop) && (
       <nav id="header__navbar">
         <Link
           className={
@@ -39,6 +50,7 @@ function Header(props) {
           <HiOutlineTable size={24} /> Table
         </Link>
       </nav>
+      )}
     </div>
   );
 }

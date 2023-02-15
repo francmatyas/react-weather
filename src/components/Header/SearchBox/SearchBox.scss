@@ -86,3 +86,20 @@
     }
   }
 }
+
+@media screen and (min-width: 1024px) {
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+}
+
+@media screen and (max-width: 767px) {
+  #search-box {
+    width: 100%;
+
+    #search-box__header {
+      padding: 8px 0.5rem;
+      gap: 0px;
+    }
+  }
+}

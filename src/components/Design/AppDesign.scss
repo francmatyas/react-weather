@@ -28,5 +28,53 @@
   
     padding: 0 1rem;
     opacity: 0.25;
+    font-size: x-large;
+  }
+}
+
+
+@media screen and (min-width: 1024px){
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  #app-design {
+    #app-design__line {
+      display: none;
+    }
+    
+    #app-design__img {
+      width: 15rem;
+    }
+
+    #app-design__demo {
+      font-size: large;
+    }
+  }
+
+}
+
+@media screen and (max-width: 767px){
+
+  #app-design {
+    #app-design__line {
+      display: none;
+    }
+    
+    #app-design__img {
+      width: 10rem;
+    }
+
+    #app-design__demo {
+      font-size: medium;
+    }
+  }
+}
+
+@media screen and (max-height: 600px){
+  #app-design {
+    #app-design__img {
+     display: none;
+    }
   }
 }
