@@ -9,21 +9,21 @@ function Navbar() {
     <nav id="navbar">
       <Link
         className={
-          path === "/react-weather"
+          path === "/"
             ? "navbar__link navbar__selected"
             : "navbar__link"
         }
-        to="/react-weather"
+        to="/"
       >
         <HiOutlineCloud size={24} /> Forecast
       </Link>
       <Link
         className={
-          path === "/react-weather/table"
+          path === "/table"
             ? "navbar__link navbar__selected"
             : "navbar__link"
         }
-        to="/react-weather/table"
+        to="/table"
       >
         <HiOutlineTable size={24} /> Table
       </Link>

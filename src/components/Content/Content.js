@@ -41,7 +41,7 @@ function Content(props) {
       <div id="weather">
         <Routes>
           <Route
-            path="/react-weather"
+            path="/"
             element={
               <CurrentWeather
                 weather={weather[0][0].data}
