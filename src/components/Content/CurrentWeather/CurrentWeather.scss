@@ -1,5 +1,4 @@
 #current-weather {
-  max-width: 32rem;
   height: min-content;
 
   background-color: #fff;
@@ -81,21 +80,23 @@
   }
 }
 
-@media screen and (min-width: 1024px){
-
+@media screen and (min-width: 1024px) {
+  #current-weather {
+    width: 32rem;
+  }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1023px){
-
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  #current-weather {
+    max-width: 32rem;
+  }
 }
 
-@media screen and (max-width: 767px){
+@media screen and (max-width: 767px) {
   #current-weather {
     #current-weather__container {
       flex-direction: column;
       gap: 2rem;
     }
-
   }
-
 }

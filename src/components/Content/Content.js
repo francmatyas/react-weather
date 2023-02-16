@@ -41,7 +41,7 @@ function Content(props) {
       <div id="weather">
         <Routes>
           <Route
-            path="/"
+            path="/react-weather"
             element={
               <CurrentWeather
                 weather={weather[0][0].data}
@@ -52,7 +52,6 @@ function Content(props) {
             }
           />
           <Route
-            exact
             path="/table"
             element={
               <WeatherTable
