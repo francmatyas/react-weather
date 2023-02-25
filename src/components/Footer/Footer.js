@@ -1,22 +1,10 @@
 import "./Footer.scss";
 
 import { GrCreativeCommons } from "react-icons/gr";
-import { useMediaQuery } from "react-responsive";
-
-import Navbar from "../Header/Navbar/Navbar";
 
 function Footer() {
-  const isTablet = useMediaQuery(
-    { query: "(max-width: 1023px)" },
-  )
-  const isMobile = useMediaQuery({
-    query: "(max-width: 767px)",
-  });
-
   return (
     <footer id="footer">
-      {(isMobile || isTablet) && <Navbar />}
-
       <div id="footer__contribution">
         <span>
           Data from{" "}

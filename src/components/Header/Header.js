@@ -20,8 +20,7 @@ function Header(props) {
         />
         <UnitSwitch unit={props.unit} onUnitChange={props.onUnitChange} />
       </div>
-
-      {isDesktop && <Navbar />}
+      <Navbar />
     </div>
   );
 }

@@ -2,11 +2,10 @@ import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 
 import Content from "./components/Content/Content";
 import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
 import AppDesign from "./components/Design/AppDesign";
 
 import summerImg from "./assets/svgs/summer.svg";
@@ -35,8 +34,9 @@ function App() {
       fetch(
         `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${location.lat}&lon=${location.lon}`,
         {
+          method: "GET",
           headers: {
-            "User-Agent": "demo-weather-app, github.com/francmatyas",
+            "Origin": "https://francmatyas.github.io",
           },
         }
       )
@@ -80,9 +80,7 @@ function App() {
               location.lon
             }&date=${date.split("T")[0]}`,
             {
-              headers: {
-                "User-Agent": "demo-weather-app, github.com/francmatyas",
-              },
+              method: "GET",
             }
           );
           const data = await response.json();
@@ -132,7 +130,6 @@ function App() {
           twilights={twilights}
         />
         <AppDesign image={image} />
-        <Footer />
       </div>
     </Router>
   );

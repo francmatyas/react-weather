@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import CurrentWeather from "./CurrentWeather/CurrentWeather";
 import WeatherTable from "./WeatherTable/WeatherTable";
 import Tutorial from "./Tutorial/Tutorial";
+import Footer from "../Footer/Footer";
 
 import { Stack, Skeleton } from "@mui/material";
 
@@ -12,7 +13,12 @@ function Content(props) {
   const weather = props.weather;
 
   if (weather.length === 0) {
-    return <Tutorial />;
+    return (
+      <>
+        <Tutorial />
+        <Footer />
+      </>
+    );
   }
 
   if (props.loader || props.twilights.length === 0 || !props.location) {
@@ -32,6 +38,7 @@ function Content(props) {
             height={240}
           />
         </Stack>
+        <Footer />
       </div>
     );
   }
@@ -64,6 +71,7 @@ function Content(props) {
           />
         </Routes>
       </div>
+      <Footer />
     </div>
   );
 }
