@@ -26,6 +26,8 @@ function App() {
     setLocation(location);
   }
 
+  console.log(location);
+
   // useEffect fetch and format weather data for selected location
 
   useEffect(() => {

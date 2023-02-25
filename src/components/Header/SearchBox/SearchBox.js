@@ -7,6 +7,31 @@ import { HiOutlineSearch, HiOutlineLocationMarker } from "react-icons/hi";
 const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
 const NOMINATIM_REVERSE_URL = "https://nominatim.openstreetmap.org/reverse?";
 
+class Location {
+  constructor(location, lat, lon) {
+    this.details = location;
+    this.lat = lat;
+    this.lon = lon;
+  }
+
+  getLocationName() {
+    const country = this.details.address.country;
+    if (this.details.address.city) {
+      return `${this.details.address.city}, ${country}`;
+    } else if (this.details.address.town) {
+      return `${this.details.address.town}, ${country}`;
+    } else if (this.details.address.village) {
+      return `${this.details.address.village}, ${country}`;
+    } else if (this.details.address.hamlet) {
+      return `${this.details.address.hamlet}, ${country}`;
+    } else if (this.details.address.administrative) {
+      return `${this.details.address.administrative}, ${country}`;
+    }
+
+    return this.details.display_name;
+  }
+}
+
 function SearchBox(props) {
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -74,7 +99,8 @@ function SearchBox(props) {
         }
 
         getCityName().then((data) => {
-          props.onSearchSelect(data);
+          const location = new Location(data, location.lat, location.lon);
+          props.onSearchSelect(location);
         });
       });
     } else {
@@ -131,13 +157,20 @@ function SearchBox(props) {
                   className="search-box__item"
                   key={result.osm_id}
                   onClick={() => {
-                    props.onSearchSelect(result);
+                    const location = new Location(
+                      result,
+                      result.lat,
+                      result.lon
+                    );
+                    props.onSearchSelect(location);
                     setSearchResults([]);
                     setSearchText("");
                   }}
                 >
                   <HiOutlineLocationMarker size={24} />
-                  <span id="search-box__result__name">{result.display_name}</span>
+                  <span id="search-box__result__name">
+                    {result.display_name}
+                  </span>
                 </div>
               ))}
             </div>

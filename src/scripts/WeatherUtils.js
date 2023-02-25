@@ -39,21 +39,66 @@ import {
   WiNightClear,
 } from "react-icons/wi";
 
-export function getLocationName(location) {
-  const country = location.address.country;
-  if (location.address.city) {
-    return `${location.address.city}, ${country}`;
-  } else if (location.address.town) {
-    return `${location.address.town}, ${country}`;
-  } else if (location.address.village) {
-    return `${location.address.village}, ${country}`;
-  } else if (location.address.hamlet) {
-    return `${location.address.hamlet}, ${country}`;
-  } else if (location.address.administrative) {
-    return `${location.address.administrative}, ${country}`;
+export class Weather {
+  constructor(latitude, longitude) {
+    this.latitude = latitude;
+    this.longitude = longitude;
+    this.weather = this.getWeather();
   }
 
-  return location.display_name;
+  async getWeather() {
+    const response = await fetch(
+      `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${this.latitude}&lon=${this.longitude}`,
+      {
+        method: "GET",
+        headers: {
+          Origin: "https://francmatyas.github.io",
+        },
+      }
+    );
+    const data = await response.json();
+    const weatherDate = Object.values(
+      data.properties.timeseries.reduce((acc, element) => {
+        const date = new Date(element.time);
+        const dateKey =
+          date.getDate() +
+          "." +
+          (date.getMonth() + 1) +
+          "." +
+          date.getFullYear();
+        if (acc[dateKey]) {
+          acc[dateKey].push(element);
+        } else {
+          acc[dateKey] = [element];
+        }
+        return acc;
+      }, {})
+    );
+    weatherDate.pop();
+    return weatherDate;
+  }
+
+  getPrecipitation(weather) {
+    if (weather.next_1_hours !== undefined) {
+      return weather.next_1_hours.details.precipitation_amount;
+    } else if (weather.next_3_hours !== undefined) {
+      return weather.next_3_hours.details.precipitation_amount;
+    } else if (weather.next_6_hours !== undefined) {
+      return weather.next_6_hours.details.precipitation_amount;
+    }
+  }
+
+  getWeatherCode(weather) {
+    if (weather.next_1_hours !== undefined) {
+      return weather.next_1_hours.summary.symbol_code;
+    } else if (weather.next_3_hours !== undefined) {
+      return weather.next_3_hours.summary.symbol_code;
+    } else if (weather.next_6_hours !== undefined) {
+      return weather.next_6_hours.summary.symbol_code;
+    } else {
+      return "";
+    }
+  }
 }
 
 export function toFahrenheit(celsius) {

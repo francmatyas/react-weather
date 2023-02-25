@@ -1,7 +1,6 @@
 import "./WeatherPage.scss";
 import {
   formatDateGap,
-  getLocationName,
 } from "../../../../scripts/WeatherUtils";
 
 import {
@@ -17,7 +16,7 @@ import WeatherRow from "../WeatherRow/WeatherRow";
 
 function WeatherPage(props) {
   const weather = props.weather;
-  const location = getLocationName(props.location);
+  const location = props.location.getLocationName();
   const [sunrise, sunset] = props.twilight;
 
   const date = new Date(weather[0].time);
