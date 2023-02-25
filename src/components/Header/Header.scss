@@ -2,7 +2,7 @@
   grid-row: header-start / header-end;
   z-index: 3;
   width: 100%;
-  height: min-content;
+  height: 4rem;
   padding: 10px 4rem;
 
   background-color: transparent;
@@ -19,7 +19,6 @@
   }
 
   #header__unit__switch {
-    align-self: center;
     color: #424242;
 
     .header__unit__selected {
@@ -28,25 +27,25 @@
   }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1023px){
+@media screen and (min-width: 768px) and (max-width: 1023px) {
   #header {
     justify-content: center;
     padding: 10px 1rem;
 
-    #header__container{
+    #header__container {
       gap: 1rem;
     }
   }
 }
-@media screen and (max-width: 767px){
+@media screen and (max-width: 767px) {
   #header {
-    justify-content: center;
     padding: 10px 1rem;
+    height: min-content;
 
     display: flex;
     flex-direction: column;
 
-    #header__container{
+    #header__container {
       gap: 1rem;
     }
   }
