@@ -1,7 +1,5 @@
 import "./WeatherPage.scss";
-import {
-  formatDateGap,
-} from "../../../../scripts/WeatherUtils";
+import { formatDateGap } from "../../../../scripts/WeatherUtils";
 
 import {
   WiSunrise,

@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { useState, useEffect } from "react";
 import { HashRouter as Router } from "react-router-dom";
+import { Weather } from "./scripts/WeatherUtils";
 
 import Content from "./components/Content/Content";
 import Header from "./components/Header/Header";
@@ -26,8 +27,6 @@ function App() {
     setLocation(location);
   }
 
-  console.log(location);
-
   // useEffect fetch and format weather data for selected location
 
   useEffect(() => {
@@ -38,7 +37,7 @@ function App() {
         {
           method: "GET",
           headers: {
-            "Origin": "https://francmatyas.github.io",
+            Origin: "https://francmatyas.github.io",
           },
         }
       )
@@ -54,9 +53,11 @@ function App() {
                 "." +
                 date.getFullYear();
               if (acc[dateKey]) {
-                acc[dateKey].push(element);
+                const weather = new Weather(element);
+                acc[dateKey].push(weather);
               } else {
-                acc[dateKey] = [element];
+                const weather = new Weather(element);
+                acc[dateKey] = [weather];
               }
               return acc;
             }, {})
@@ -100,16 +101,19 @@ function App() {
   useEffect(() => {
     if (weatherDate.length !== 0) {
       const currentWeather = weatherDate[0][0];
-      const temp = currentWeather.data.instant.details.air_temperature;
-      const precipitation =
-        currentWeather.data.next_1_hours.details.precipitation_amount;
 
-      if (precipitation < 0.1 && temp > 20) {
+      if (
+        currentWeather.getPrecipitation() < 0.1 &&
+        currentWeather.getTemperature() > 20
+      ) {
         setImage(summerImg);
-      } else if (precipitation < 0.1 && temp < 5) {
+      } else if (
+        currentWeather.getPrecipitation() < 0.1 &&
+        currentWeather.getTemperature() < 5
+      ) {
         setImage(winterImg);
       }
-      if (precipitation > 0.1) {
+      if (currentWeather.getPrecipitation() > 0.1) {
         setImage(rainImg);
       }
     }

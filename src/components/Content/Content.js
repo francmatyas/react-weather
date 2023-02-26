@@ -51,7 +51,7 @@ function Content(props) {
             path="/"
             element={
               <CurrentWeather
-                weather={weather[0][0].data}
+                weather={weather[0][0]}
                 twilight={props.twilights[0]}
                 location={props.location}
                 unit={props.unit}
