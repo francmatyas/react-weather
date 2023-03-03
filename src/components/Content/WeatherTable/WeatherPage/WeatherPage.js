@@ -29,26 +29,26 @@ function WeatherPage(props) {
   return (
     <div id="weather-page">
       <div id="weather-page__header">
-        <span id="weather-page__location">{location}</span>
+        <p id="weather-page__location">{location}</p>
       </div>
 
       <div id="weather-page__table">
         <div id="weather-page__table__header">
-          <span id="weather-page__header__time">
+          <p id="weather-page__header__time">
             <WiTime8 size={32} />
-          </span>
-          <span id="weather-page__header__icon">
+          </p>
+          <p id="weather-page__header__icon">
             {/* Filler span for grid */}
-          </span>
-          <span id="weather-page__header__temp">
+          </p>
+          <p id="weather-page__header__temp">
             <WiThermometerExterior size={32} />
-          </span>
-          <span id="weather-page__header__precipitation">
+          </p>
+          <p id="weather-page__header__precipitation">
             <WiUmbrella size={32} />
-          </span>
-          <span id="weather-page__header__wind">
+          </p>
+          <p id="weather-page__header__wind">
             <WiTornado size={32} />
-          </span>
+          </p>
         </div>
 
         <div className="weather-page__rows">
@@ -62,19 +62,19 @@ function WeatherPage(props) {
         </div>
 
         <div id="weather-page__table__footer">
-          <span className="weather-page__footer__row">
+          <p className="weather-page__footer__row">
             <WiSunrise size={24} />
             {sunrise}
-          </span>
-          <span className="weather-page__footer__row">
+          </p>
+          <p className="weather-page__footer__row">
             <WiSunset size={24} />
             {sunset}
-          </span>
+          </p>
         </div>
       </div>
 
       <div id="weather-page__footer">
-        <span id="weather-page__date">{day}</span>
+        <p id="weather-page__date">{day}</p>
       </div>
     </div>
   );

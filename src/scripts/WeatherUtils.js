@@ -314,7 +314,7 @@ export function formatDateGap(weather) {
       if (time === nextTime - 1) {
         weather[i]["hour"] = correctHour(time);
       } else {
-        weather[i]["hour"] = correctHour(time) + " - " + correctHour(nextTime);
+        weather[i]["hour"] = correctHour(time) + " - " + correctHour(nextTime);
       }
 
       if (i === weather.length - 2) {
@@ -322,7 +322,7 @@ export function formatDateGap(weather) {
           weather[i + 1]["hour"] = correctHour(nextTime);
         } else {
           weather[i + 1]["hour"] =
-            correctHour(nextTime) + " - " + correctHour((nextTime + 6) % 24);
+            correctHour(nextTime) + " - " + correctHour((nextTime + 6) % 24);
         }
       }
     }

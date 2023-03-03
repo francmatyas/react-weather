@@ -9,25 +9,25 @@ function WeatherRow(props) {
 
   return (
     <div id="weather-row">
-      <span id="weather-row__time">{time}</span>
+      <p id="weather-row__time">{time}</p>
       <Tooltip title={weather.getDescription()} placement="top">
         <span id="weather-row__icon">{weather.getIcon(32)}</span>
       </Tooltip>
-      <span id="weather-row__temp">
+      <p id="weather-row__temp">
         {props.unit === "celsius"
           ? weather.getCelsiusTemperature()
           : weather.getFahrenheitTemperature()}
-      </span>
-      <span id="weather-row__precipitation">
+      </p>
+      <p id="weather-row__precipitation">
         {precipitation !== 0 && precipitation ? precipitation + " mm" : ""}
-      </span>
-      <span id="weather-row__wind">
+      </p>
+      <p id="weather-row__wind">
         {Math.round(weather.getWindSpeed())} m/s{" "}
         <HiOutlineArrowNarrowDown
           size={24}
           style={{ transform: `rotate(${weather.getWindDirection()}deg)` }}
         />
-      </span>
+      </p>
     </div>
   );
 }

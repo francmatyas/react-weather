@@ -11,6 +11,10 @@
   display: grid;
   grid-template-rows: min-content 1fr min-content;
 
+  p{
+    margin: 0;
+  }
+
   #current-weather__header {
     font-size: 1.2rem;
 

@@ -9,7 +9,7 @@ function WeatherTable(props) {
   const [page, setPage] = useState(1);
 
   return (
-    <div id="weather-table">
+    <section id="weather-table">
       <WeatherPage
         weather={weather[page - 1]}
         unit={props.unit}
@@ -23,7 +23,7 @@ function WeatherTable(props) {
         color="primary"
         onChange={(event, value) => setPage(value)}
       />
-    </div>
+    </section>
   );
 }
 

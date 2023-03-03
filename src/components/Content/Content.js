@@ -14,16 +14,16 @@ function Content(props) {
 
   if (weather.length === 0) {
     return (
-      <>
+      <main id="content">
         <Tutorial />
         <Footer />
-      </>
+      </main>
     );
   }
 
   if (props.loader || props.twilights.length === 0 || !props.location) {
     return (
-      <div id="content">
+      <main id="content">
         <Stack spacing={1}>
           <Skeleton
             animation="wave"
@@ -39,12 +39,12 @@ function Content(props) {
           />
         </Stack>
         <Footer />
-      </div>
+      </main>
     );
   }
 
   return (
-    <div id="content">
+    <main id="content">
       <div id="weather">
         <Routes>
           <Route
@@ -72,7 +72,7 @@ function Content(props) {
         </Routes>
       </div>
       <Footer />
-    </div>
+    </main>
   );
 }
 
