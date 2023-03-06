@@ -42,67 +42,70 @@ import {
 import weatherLegend from "../assets/data/weatherLegend.json";
 
 export class Weather {
+  time;
+  temperature;
+  ceslsiusTemperature;
+  fahrenheitTemperature;
+  windSpeed;
+  windDirection;
+  humidity;
+  precipitation;
+  description;
+  weatherCode;
+
   constructor(weather) {
     this.time = weather.time;
-    this.weather = weather.data;
+    const data = weather.data;
+
+    this.temperature = data.instant.details.air_temperature;
+    this.celsiusTemperature = this.#getCelsiusTemperature(data);
+    this.fahrenheitTemperature = this.#getFahrenheitTemperature(data);
+    this.windSpeed = data.instant.details.wind_speed;
+    this.windDirection = data.instant.details.wind_from_direction;
+    this.humidity = data.instant.details.relative_humidity;
+    this.precipitation = this.#getPrecipitation(data);
+    this.weatherCode = this.#getWeatherCode(data);
+    this.description = this.#getDescription();
   }
 
   #toFahrenheit(celsius) {
     return (celsius * 9) / 5 + 32;
   }
-
-  getTemperature() {
-    return this.weather.instant.details.air_temperature;
+  #getFahrenheitTemperature() {
+    return Math.round(this.#toFahrenheit(this.temperature)) + "°F";
+  }
+  #getCelsiusTemperature() {
+    return Math.round(this.temperature) + "°C";
   }
 
-  getFahrenheitTemperature() {
-    return Math.round(this.#toFahrenheit(this.getTemperature())) + "°F";
-  }
-
-  getCelsiusTemperature() {
-    return Math.round(this.getTemperature()) + "°C";
-  }
-
-  getWindSpeed() {
-    return this.weather.instant.details.wind_speed;
-  }
-
-  getWindDirection() {
-    return this.weather.instant.details.wind_from_direction;
-  }
-
-  getHumidity() {
-    return this.weather.instant.details.relative_humidity;
-  }
-
-  getPrecipitation() {
-    if (this.weather.next_1_hours !== undefined) {
-      return this.weather.next_1_hours.details.precipitation_amount;
-    } else if (this.weather.next_3_hours !== undefined) {
-      return this.weather.next_3_hours.details.precipitation_amount;
-    } else if (this.weather.next_6_hours !== undefined) {
-      return this.weather.next_6_hours.details.precipitation_amount;
+  #getPrecipitation(weather) {
+    if (weather.next_1_hours !== undefined) {
+      return weather.next_1_hours.details.precipitation_amount;
+    } else if (weather.next_3_hours !== undefined) {
+      return weather.next_3_hours.details.precipitation_amount;
+    } else if (weather.next_6_hours !== undefined) {
+      return weather.next_6_hours.details.precipitation_amount;
     }
   }
 
-  #getWeatherCode() {
-    if (this.weather.next_1_hours !== undefined) {
-      return this.weather.next_1_hours.summary.symbol_code;
-    } else if (this.weather.next_3_hours !== undefined) {
-      return this.weather.next_3_hours.summary.symbol_code;
-    } else if (this.weather.next_6_hours !== undefined) {
-      return this.weather.next_6_hours.summary.symbol_code;
+  #getWeatherCode(weather) {
+    if (weather.next_1_hours !== undefined) {
+      return weather.next_1_hours.summary.symbol_code;
+    } else if (weather.next_3_hours !== undefined) {
+      return weather.next_3_hours.summary.symbol_code;
+    } else if (weather.next_6_hours !== undefined) {
+      return weather.next_6_hours.summary.symbol_code;
     } else {
       return "";
     }
   }
 
-  getDescription() {
-    return weatherLegend[this.#getWeatherCode().split("_")[0]]?.desc_en;
+  #getDescription() {
+    return weatherLegend[this.weatherCode.split("_")[0]]?.desc_en;
   }
 
   getIcon(size) {
-    switch (this.#getWeatherCode()) {
+    switch (this.weatherCode) {
       case "clearsky_night":
         return <WiNightClear size={size} />;
 

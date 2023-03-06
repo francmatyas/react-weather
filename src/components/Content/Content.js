@@ -1,6 +1,7 @@
 import "./Content.scss";
 
 import { Routes, Route } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 import CurrentWeather from "./CurrentWeather/CurrentWeather";
 import WeatherTable from "./WeatherTable/WeatherTable";
@@ -10,6 +11,7 @@ import Footer from "../Footer/Footer";
 import { Stack, Skeleton } from "@mui/material";
 
 function Content(props) {
+  const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
   const weather = props.weather;
 
   if (weather.length === 0) {
@@ -28,14 +30,14 @@ function Content(props) {
           <Skeleton
             animation="wave"
             variant="rounded"
-            width={512}
+            width={isMobile ? 320 : 512}
             height={60}
           />
           <Skeleton
             animation="wave"
             variant="rounded"
-            width={512}
-            height={240}
+            width={isMobile ? 320 : 512}
+            height={isMobile ? 480 : 240}
           />
         </Stack>
         <Footer />

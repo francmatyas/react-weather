@@ -8,27 +8,31 @@ const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
 const NOMINATIM_REVERSE_URL = "https://nominatim.openstreetmap.org/reverse?";
 
 class Location {
-  constructor(location, lat, lon) {
-    this.details = location;
+  lat;
+  lon;
+  display_name;
+
+  constructor(lat, lon, display_name, address) {
     this.lat = lat;
     this.lon = lon;
+    this.display_name = this.#getName(address, display_name);
   }
 
-  getLocationName() {
-    const country = this.details.address.country;
-    if (this.details.address.city) {
-      return `${this.details.address.city}, ${country}`;
-    } else if (this.details.address.town) {
-      return `${this.details.address.town}, ${country}`;
-    } else if (this.details.address.village) {
-      return `${this.details.address.village}, ${country}`;
-    } else if (this.details.address.hamlet) {
-      return `${this.details.address.hamlet}, ${country}`;
-    } else if (this.details.address.administrative) {
-      return `${this.details.address.administrative}, ${country}`;
+  #getName(address, display_name) {
+    const country = address.country;
+    if (address.city) {
+      return `${address.city}, ${country}`;
+    } else if (address.town) {
+      return `${address.town}, ${country}`;
+    } else if (address.village) {
+      return `${address.village}, ${country}`;
+    } else if (address.hamlet) {
+      return `${address.hamlet}, ${country}`;
+    } else if (address.administrative) {
+      return `${address.administrative}, ${country}`;
     }
 
-    return this.details.display_name;
+    return display_name;
   }
 }
 
@@ -99,7 +103,8 @@ function SearchBox(props) {
         }
 
         getCityName().then((data) => {
-          const location = new Location(data, location.lat, location.lon);
+          const { lat, lon, display_name, address } = data;
+          const location = new Location(lat, lon, display_name, address);
           props.onSearchSelect(location);
         });
       });
@@ -157,10 +162,12 @@ function SearchBox(props) {
                   className="search-box__item"
                   key={result.osm_id}
                   onClick={() => {
+                    const { lat, lon, display_name, address } = result;
                     const location = new Location(
-                      result,
-                      result.lat,
-                      result.lon
+                      lat,
+                      lon,
+                      display_name,
+                      address
                     );
                     props.onSearchSelect(location);
                     setSearchResults([]);

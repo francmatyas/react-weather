@@ -13,9 +13,12 @@ import {
 import WeatherRow from "../WeatherRow/WeatherRow";
 
 function WeatherPage(props) {
-  const weather = props.weather;
-  const location = props.location.getLocationName();
-  const [sunrise, sunset] = props.twilight;
+  const {
+    weather,
+    location,
+    twilight: [sunrise, sunset],
+    unit,
+  } = props;
 
   const date = new Date(weather[0].time);
   const day = date.toLocaleDateString("en-GB", {
@@ -29,7 +32,7 @@ function WeatherPage(props) {
   return (
     <div id="weather-page">
       <div id="weather-page__header">
-        <p id="weather-page__location">{location}</p>
+        <p id="weather-page__location">{location.display_name}</p>
       </div>
 
       <div id="weather-page__table">
@@ -37,9 +40,7 @@ function WeatherPage(props) {
           <p id="weather-page__header__time">
             <WiTime8 size={32} />
           </p>
-          <p id="weather-page__header__icon">
-            {/* Filler span for grid */}
-          </p>
+          <p id="weather-page__header__icon">{/* Filler span for grid */}</p>
           <p id="weather-page__header__temp">
             <WiThermometerExterior size={32} />
           </p>
@@ -53,11 +54,7 @@ function WeatherPage(props) {
 
         <div className="weather-page__rows">
           {weather.map((element) => (
-            <WeatherRow
-              unit={props.unit}
-              weather={element}
-              key={Math.random()}
-            />
+            <WeatherRow unit={unit} weather={element} key={Math.random()} />
           ))}
         </div>
 

@@ -100,20 +100,14 @@ function App() {
 
   useEffect(() => {
     if (weatherDate.length !== 0) {
-      const currentWeather = weatherDate[0][0];
+      const { temerature, precipitation } = weatherDate[0][0];
 
-      if (
-        currentWeather.getPrecipitation() < 0.1 &&
-        currentWeather.getTemperature() > 20
-      ) {
+      if (precipitation < 0.1 && temerature > 20) {
         setImage(summerImg);
-      } else if (
-        currentWeather.getPrecipitation() < 0.1 &&
-        currentWeather.getTemperature() < 5
-      ) {
+      } else if (precipitation < 0.1 && temerature < 5) {
         setImage(winterImg);
       }
-      if (currentWeather.getPrecipitation() > 0.1) {
+      if (precipitation > 0.1) {
         setImage(rainImg);
       }
     }

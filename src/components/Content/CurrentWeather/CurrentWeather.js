@@ -11,20 +11,32 @@ import {
 import { HiOutlineArrowNarrowDown } from "react-icons/hi";
 
 function CurrentWeather(props) {
-  const weather = props.weather;
-  const location = props.location.getLocationName();
-  const [sunrise, sunset] = props.twilight;
+  const {
+    weather,
+    weather: {
+      temperature,
+      celsiusTemperature,
+      fahrenheitTemperature,
+      windSpeed,
+      windDirection,
+      humidity,
+      precipitation,
+      description,
+    },
+    location,
+    twilight: [sunrise, sunset],
+    unit,
+  } = props;
+
   return (
     <section id="current-weather">
       <div id="current-weather__header">
-        <p>{location}</p>
+        <p>{location.display_name}</p>
       </div>
 
       <div id="current-weather__container">
         <div className="current-weather__data__col">
-          <p id="current-weather__description">
-            {weather.getDescription()}
-          </p>
+          <p id="current-weather__description">{description}</p>
           <span id="current-weather__icon">{weather.getIcon(128)}</span>
         </div>
 
@@ -33,35 +45,30 @@ function CurrentWeather(props) {
             <WiThermometerExterior size={32} />
             <span
               style={{
-                color:
-                  Math.round(weather.getTemperature()) > 0
-                    ? "#f44336"
-                    : "#03a9f4",
+                color: Math.round(temperature) > 0 ? "#f44336" : "#03a9f4",
               }}
             >
-              {props.unit === "celsius"
-                ? weather.getCelsiusTemperature()
-                : weather.getFahrenheitTemperature()}
+              {unit === "celsius" ? celsiusTemperature : fahrenheitTemperature}
             </span>
           </p>
 
           <p className="current-weather__data">
             <WiUmbrella size={32} />
-            {weather.getPrecipitation() + " mm"}
+            {precipitation + " mm"}
           </p>
 
           <p className="current-weather__data">
             <WiTornado size={32} />
-            {weather.getWindSpeed() + " m/s"}
+            {windSpeed + " m/s"}
             <HiOutlineArrowNarrowDown
               size={24}
-              style={{ transform: `rotate(${weather.getWindDirection()}deg)` }}
+              style={{ transform: `rotate(${windDirection}deg)` }}
             />
           </p>
 
           <p className="current-weather__data">
             <WiHumidity size={32} />
-            {weather.getHumidity() + "%"}
+            {humidity + "%"}
           </p>
         </div>
       </div>
